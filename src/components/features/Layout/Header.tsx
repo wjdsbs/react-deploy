@@ -24,8 +24,9 @@ export const Header = () => {
             alt="카카오 선물하기 로고"
           />
         </Link>
-        <ServerSelector />
+
         <RightWrapper>
+          <ServerSelector />
           {authInfo ? (
             <LinkButton onClick={() => navigate(RouterPath.myAccount)}>내 계정</LinkButton>
           ) : (
@@ -52,7 +53,11 @@ export const Wrapper = styled.header`
 const Logo = styled.img`
   height: ${HEADER_HEIGHT};
 `;
-const RightWrapper = styled.div``;
+const RightWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
 
 const LinkButton = styled.p`
   align-items: center;
