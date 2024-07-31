@@ -5,6 +5,8 @@ import { Container } from '@/components/common/layouts/Container';
 import { useAuth } from '@/provider/Auth';
 import { getDynamicPath, RouterPath } from '@/routes/path';
 
+import { ServerSelector } from './ServerSelector';
+
 export const Header = () => {
   const navigate = useNavigate();
   const authInfo = useAuth();
@@ -22,6 +24,7 @@ export const Header = () => {
             alt="카카오 선물하기 로고"
           />
         </Link>
+        <ServerSelector />
         <RightWrapper>
           {authInfo ? (
             <LinkButton onClick={() => navigate(RouterPath.myAccount)}>내 계정</LinkButton>
