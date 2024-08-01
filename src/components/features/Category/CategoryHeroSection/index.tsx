@@ -18,13 +18,13 @@ export const CategoryHeroSection = ({ categoryId }: Props) => {
     return null;
   }
 
-  const { color, name, description } = currentTheme;
+  const { backgroundColor, label, title } = currentTheme;
 
   return (
-    <Wrapper backgroundColor={color}>
+    <Wrapper backgroundColor={backgroundColor}>
       <Container>
-        <Label>{name}</Label>
-        <Title>{description}</Title>
+        <Label>{label}</Label>
+        <Title>{title}</Title>
       </Container>
     </Wrapper>
   );
@@ -71,5 +71,5 @@ const Title = styled.h1`
 `;
 
 export const getCurrentCategory = (categoryId: string, categoryList: CategoryData[]) => {
-  return categoryList.find((category) => category.id.toString() === categoryId);
+  return categoryList.find((category) => category.categoryId.toString() === categoryId);
 };

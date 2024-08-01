@@ -1,9 +1,10 @@
 export type CategoryData = {
-  id: number;
-  name: string;
+  label: string;
+  imageURL: string;
+  title: string;
   description: string;
-  color: string;
-  imageUrl: string;
+  backgroundColor: string;
+  categoryId: number;
 };
 
 export type ProductData = {
