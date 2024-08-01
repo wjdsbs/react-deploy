@@ -23,7 +23,7 @@ type ProductsResponseData = {
 };
 
 type ProductsResponseRawData = {
-  content: ProductData[];
+  resultData: ProductData[];
   number: number;
   totalElements: number;
   size: number;
@@ -46,7 +46,7 @@ export const getProducts = async (params: RequestParams): Promise<ProductsRespon
   const data = response.data;
 
   return {
-    products: data.content,
+    products: data.resultData,
     nextPageToken: data.last === false ? (data.number + 1).toString() : undefined,
     pageInfo: {
       totalResults: data.totalElements,

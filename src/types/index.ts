@@ -12,7 +12,11 @@ export type ProductData = {
   name: string;
   price: number;
   imageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  wishUserId: number[];
   categoryId: number;
+  optionsId: number[];
 };
 
 export type ProductOptionsData = {
