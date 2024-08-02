@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/wjdsbs/react-deploy.git/static/css/main.689b7bff.css",
+    "main.js": "/wjdsbs/react-deploy.git/static/js/main.57c91c60.js",
+    "static/js/531.28046fc6.chunk.js": "/wjdsbs/react-deploy.git/static/js/531.28046fc6.chunk.js",
+    "static/js/689.1ed627ce.chunk.js": "/wjdsbs/react-deploy.git/static/js/689.1ed627ce.chunk.js",
+    "static/media/kakao_logo.svg": "/wjdsbs/react-deploy.git/static/media/kakao_logo.976fd2de0dc47a40dc4cad638b9b69e1.svg",
+    "index.html": "/wjdsbs/react-deploy.git/index.html",
+    "main.689b7bff.css.map": "/wjdsbs/react-deploy.git/static/css/main.689b7bff.css.map",
+    "main.57c91c60.js.map": "/wjdsbs/react-deploy.git/static/js/main.57c91c60.js.map",
+    "531.28046fc6.chunk.js.map": "/wjdsbs/react-deploy.git/static/js/531.28046fc6.chunk.js.map",
+    "689.1ed627ce.chunk.js.map": "/wjdsbs/react-deploy.git/static/js/689.1ed627ce.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.689b7bff.css",
+    "static/js/main.57c91c60.js"
+  ]
+}
