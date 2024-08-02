@@ -5,7 +5,7 @@ import type { CategoryData } from '@/types';
 
 export type CategoryResponseData = CategoryData[];
 
-export const getCategoriesPath = () => `${getBaseURL()}/api/categories`;
+export const getCategoriesPath = () => `${getBaseURL()}/api/category`;
 const categoriesQueryKey = [getCategoriesPath()];
 
 export const getCategories = async () => {

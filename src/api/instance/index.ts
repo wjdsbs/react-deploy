@@ -20,6 +20,25 @@ const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
     },
   });
 
+  // 동혁님용 인터셉터 추가
+  instance.interceptors.request.use(
+    (request) => {
+      // 특정 도메인에 대해서만 Authorization 헤더 추가
+      if (request.url && request.url.startsWith('http://43.203.225.165:8080')) {
+        // const token = localStorage.getItem('authToken');
+        const token =
+          'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJrYWthbzFAa2FrYW8uY29tIiwic29jaWFsVG9rZW4iOiIiLCJzb2NpYWxUeXBlIjoiT1RIRVIiLCJpYXQiOjE3MjI1OTc1NzUsImV4cCI6MTcyMjYwMTE3NX0.s0boyorD_6G7jmGq8TqGjFPfeSn_hx_87q-aK75AZpU';
+        if (token) {
+          request.headers.Authorization = `Bearer ${token}`;
+        }
+      }
+      return request;
+    },
+    (error) => {
+      return Promise.reject(error);
+    },
+  );
+
   return instance;
 };
 
