@@ -56,7 +56,6 @@ export const getProducts = async (params: RequestParams): Promise<ProductsRespon
 };
 
 type Params = Pick<RequestParams, 'maxResults' | 'categoryId'> & { initPageToken?: string };
-
 export const useGetProducts = ({
   categoryId,
   maxResults = 20,
