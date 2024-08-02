@@ -1,15 +1,4 @@
-// src/mocks/mockData.ts
-
-export interface OrderResultData {
-  productId: number;
-  productName: string;
-  productPrice: number;
-  optionId: number;
-  quantity: number;
-  createdAt: string;
-  updatedAt: string;
-  optionName: string;
-}
+import { type OrderResultData } from '@/types/';
 
 export const mockOrderResponse: OrderResultData = {
   productId: 1,
