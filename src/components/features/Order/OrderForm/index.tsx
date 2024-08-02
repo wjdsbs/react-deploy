@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { FormProvider, useForm } from 'react-hook-form';
 
+import { postOrder } from '@/api/hooks/order.mock'; // Adjust the path as needed
 import { Spacing } from '@/components/common/layouts/Spacing';
 import { SplitLayout } from '@/components/common/layouts/SplitLayout';
 import type { OrderFormData, OrderHistory } from '@/types';
@@ -28,7 +29,7 @@ export const OrderForm = ({ orderHistory }: Props) => {
   });
   const { handleSubmit } = methods;
 
-  const handleForm = (values: OrderFormData) => {
+  const handleForm = async (values: OrderFormData) => {
     const { errorMessage, isValid } = validateOrderForm(values);
 
     if (!isValid) {
@@ -36,11 +37,19 @@ export const OrderForm = ({ orderHistory }: Props) => {
       return;
     }
 
-    console.log('values', values);
-    alert('주문이 완료되었습니다.');
+    try {
+      const response = await postOrder(values.productId, values.productQuantity);
+      console.log(response);
+      alert(`주문이 완료되었습니다.`);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(`주문 제출 중 오류가 발생했습니다: ${error.message}`);
+      } else {
+        alert('주문 제출 중 알 수 없는 오류가 발생했습니다.');
+      }
+    }
   };
 
-  // Submit 버튼을 누르면 form이 제출되는 것을 방지하기 위한 함수
   const preventEnterKeySubmission = (e: React.KeyboardEvent<HTMLFormElement>) => {
     const target = e.target as HTMLFormElement;
     if (e.key === 'Enter' && !['TEXTAREA'].includes(target.tagName)) {
