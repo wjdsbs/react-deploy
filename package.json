@@ -98,5 +98,5 @@
     "src/**/*",
     "setupProxy.js"
   ],
-  "homepage": "https://wjdsbs.github.io/react-deploy.git"
+  "homepage": "https://wjdsbs.github.io/react-deploy/"
 }
