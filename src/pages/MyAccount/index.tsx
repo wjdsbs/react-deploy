@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import { Button } from '@/components/common/Button';
 import { Spacing } from '@/components/common/layouts/Spacing';
+import { MyOrderlist } from '@/components/features/MyAccount/MyOrderlist';
 import { Wishlist } from '@/components/features/MyAccount/Wishlist';
 import { useAuth } from '@/provider/Auth';
 import { RouterPath } from '@/routes/path';
@@ -31,7 +32,10 @@ export const MyAccountPage = () => {
             로그아웃
           </Button>
         </ProfileWrapper>
-        <Wishlist />
+        <RightWrapper>
+          <MyOrderlist />
+          <Wishlist />
+        </RightWrapper>
       </InnerWrapper>
     </Wrapper>
   );
@@ -64,3 +68,5 @@ const InnerWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
 `;
+
+const RightWrapper = styled.div``;
