@@ -18,10 +18,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [authInfo, setAuthInfo] = useState<AuthInfo | undefined>(undefined);
 
   useEffect(() => {
+    // 참고 : https://velog.io/@xxyeon129/JWT-decoding%ED%95%98%EA%B8%B0JavaScript
     if (currentAuthToken) {
+      const base64Payload = currentAuthToken.split('.')[1];
+      const base64 = base64Payload.replace(/-/g, '+').replace(/_/g, '/');
+
+      const decodedJWT = JSON.parse(
+        decodeURIComponent(
+          window
+            .atob(base64)
+            .split('')
+            .map(function (c) {
+              return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join(''),
+        ),
+      );
+
       setAuthInfo({
-        id: currentAuthToken, // TODO: 임시로 로그인 페이지에서 입력한 이름을 ID, token, name으로 사용
-        name: currentAuthToken,
+        id: decodedJWT.email,
+        name: decodedJWT.email,
         token: currentAuthToken,
       });
       setIsReady(true);
