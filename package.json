@@ -93,5 +93,6 @@
       "^@/(.+)": "<rootDir>/src/$1",
       "^axios$": "axios/dist/node/axios.cjs"
     }
-  }
+  },
+  "proxy": "http://13.209.83.84:8080"
 }

@@ -19,7 +19,7 @@ export const CategoryHeroSection = ({ categoryId }: Props) => {
   }
 
   const { backgroundColor, name, title } = currentTheme;
-
+  console.log(currentTheme);
   return (
     <Wrapper backgroundColor={backgroundColor}>
       <Container>

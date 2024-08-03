@@ -3,8 +3,9 @@ export type CategoryData = {
   imageUrl: string;
   title: string;
   description: string;
-  backgroundColor: string;
+  color: string;
   id: number;
+  backgroundColor?: string;
 };
 
 export type ProductData = {

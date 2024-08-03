@@ -7,12 +7,10 @@ import { servers } from '../constants';
 const SESSION_STORAGE_KEY = 'selectedServer';
 
 let axiosInstance: AxiosInstance | null = null;
-let currentBaseURL =
-  servers[sessionStorage.getItem(SESSION_STORAGE_KEY)!] || 'http://43.202.48.64:8080';
-
+let currentBaseURL = servers[sessionStorage.getItem(SESSION_STORAGE_KEY)!] || servers[0];
 const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
   const instance = axios.create({
-    baseURL: currentBaseURL,
+    baseURL: 'http://13.209.83.84:8080',
     timeout: 5000,
     ...config,
     headers: {
@@ -31,7 +29,7 @@ const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
       if (request.url && request.url.startsWith('http://43.203.225.165:8080')) {
         // const token = localStorage.getItem('authToken');
         const token =
-          'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJrYWthbzFAa2FrYW8uY29tIiwic29jaWFsVG9rZW4iOiIiLCJzb2NpYWxUeXBlIjoiT1RIRVIiLCJpYXQiOjE3MjI1OTc1NzUsImV4cCI6MTcyMjYwMTE3NX0.s0boyorD_6G7jmGq8TqGjFPfeSn_hx_87q-aK75AZpU';
+          'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJrYWthbzFAa2FrYW8uY29tIiwic29jaWFsVG9rZW4iOiIiLCJzb2NpYWxUeXBlIjoiT1RIRVIiLCJpYXQiOjE3MjI2OTI1MjQsImV4cCI6MTcyMjY5NjEyNH0.hI4TL12yG-Q_9V_RjIqAA_atRiUivR_vMk8NmIcs3FE';
         if (token) {
           request.headers.Authorization = `Bearer ${token}`;
         }
