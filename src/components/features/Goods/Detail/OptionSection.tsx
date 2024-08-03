@@ -31,6 +31,7 @@ export const OptionSection = ({ productId }: Props) => {
   const authInfo = useAuth();
 
   const handleWishButtonClick = async () => {
+    const token = authInfo?.token;
     if (!authInfo) {
       const isConfirm = window.confirm(
         '로그인이 필요한 메뉴입니다.\n로그인 페이지로 이동하시겠습니까?',
@@ -46,11 +47,11 @@ export const OptionSection = ({ productId }: Props) => {
     }
 
     try {
-      const response = await fetch('/api/wishes', {
+      const response = await fetch('/api/wish', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer valid-token',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ productId }),
       });
@@ -63,6 +64,8 @@ export const OptionSection = ({ productId }: Props) => {
       setIsFavorited(true);
     } catch (err) {
       if (err instanceof Error) {
+        console.log(`token : ${token}`);
+
         alert('관심 등록 실패: ' + err.message);
       }
     }

@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             .join(''),
         ),
       );
-
+      console.log(decodedJWT);
       setAuthInfo({
         id: decodedJWT.email,
         name: decodedJWT.email,
