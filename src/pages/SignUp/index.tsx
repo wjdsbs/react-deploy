@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { getBaseURL } from '@/api/instance';
 import KAKAO_LOGO from '@/assets/kakao_logo.svg';
 import { Button } from '@/components/common/Button';
 import { UnderlineTextField } from '@/components/common/Form/Input/UnderlineTextField';
@@ -25,14 +26,13 @@ export const SignUpPage = () => {
       return;
     }
     try {
-      const response = await fetch('/api/members/register', {
+      const response = await fetch(getBaseURL() + '/api/user/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password } as SignUpRequest),
       });
-
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message);
