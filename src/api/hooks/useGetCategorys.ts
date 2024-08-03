@@ -10,6 +10,7 @@ const categoriesQueryKey = [getCategoriesPath()];
 
 export const getCategories = async () => {
   const response = await getInstance().get<CategoryResponseData>(getCategoriesPath());
+  console.log(response);
   return response.data;
 };
 

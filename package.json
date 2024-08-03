@@ -93,9 +93,5 @@
       "^@/(.+)": "<rootDir>/src/$1",
       "^axios$": "axios/dist/node/axios.cjs"
     }
-  },
-  "include": [
-    "src/**/*",
-    "setupProxy.js"
-  ]
+  }
 }

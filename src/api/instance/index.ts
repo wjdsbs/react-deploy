@@ -7,10 +7,12 @@ import { servers } from '../constants';
 const SESSION_STORAGE_KEY = 'selectedServer';
 
 let axiosInstance: AxiosInstance | null = null;
-let currentBaseURL = servers[sessionStorage.getItem(SESSION_STORAGE_KEY)!];
+let currentBaseURL =
+  servers[sessionStorage.getItem(SESSION_STORAGE_KEY)!] || 'http://43.202.48.64:8080';
 
 const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
   const instance = axios.create({
+    baseURL: currentBaseURL,
     timeout: 5000,
     ...config,
     headers: {
@@ -18,8 +20,10 @@ const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
       'Content-Type': 'application/json',
       ...config.headers,
     },
+    withCredentials: true,
   });
 
+  console.log(currentBaseURL);
   // 동혁님용 인터셉터 추가
   instance.interceptors.request.use(
     (request) => {

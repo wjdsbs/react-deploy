@@ -4,7 +4,7 @@ import {
   type UseInfiniteQueryResult,
 } from '@tanstack/react-query';
 
-import { getBaseURL, getInstance } from '@/api/instance';
+import { getInstance } from '@/api/instance';
 import type { ProductData } from '@/types';
 
 type RequestParams = {
@@ -38,7 +38,7 @@ export const getProductsPath = ({ categoryId, pageToken, maxResults }: RequestPa
   if (pageToken) params.append('page', pageToken);
   if (maxResults) params.append('size', maxResults.toString());
 
-  return `${getBaseURL()}/api/products?${params.toString()}`;
+  return `/api/products?${params.toString()}`;
 };
 
 export const getProducts = async (params: RequestParams): Promise<ProductsResponseData> => {
