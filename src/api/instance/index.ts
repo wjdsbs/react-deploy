@@ -7,10 +7,12 @@ import { servers } from '../constants';
 const SESSION_STORAGE_KEY = 'selectedServer';
 
 let axiosInstance: AxiosInstance | null = null;
-let currentBaseURL = servers[sessionStorage.getItem(SESSION_STORAGE_KEY)!] || servers[0];
+let currentBaseURL =
+  servers[sessionStorage.getItem(SESSION_STORAGE_KEY)!] || Object.values(servers)[0];
+
 const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
   const instance = axios.create({
-    baseURL: 'http://13.209.83.84:8080',
+    baseURL: 'http://43.203.255.125',
     timeout: 5000,
     ...config,
     headers: {
