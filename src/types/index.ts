@@ -1,9 +1,10 @@
 export type CategoryData = {
-  id: number;
-  name: string;
+  label: string;
+  imageURL: string;
+  title: string;
   description: string;
-  color: string;
-  imageUrl: string;
+  backgroundColor: string;
+  categoryId: number;
 };
 
 export type ProductData = {
@@ -19,16 +20,6 @@ export type ProductOptionsData = {
   name: string;
   quantity: number;
   productId: number;
-};
-
-export type GoodsDetailOptionItemData = {
-  key: string;
-  value: string;
-  level: number;
-  options: GoodsDetailOptionItemData[]; // 재귀적으로 동일한 구조를 가질 수 있음
-  id?: number;
-  price?: number;
-  stockQuantity: number;
 };
 
 export type OrderHistory = {
@@ -47,9 +38,13 @@ export type OrderFormData = {
   cashReceiptNumber?: string;
 };
 
-export type MessageCardTemplateData = {
-  id: number;
-  defaultTextMessage: string;
-  thumbUrl: string;
-  imageUrl: string;
+export type OrderResultData = {
+  productId: number;
+  productName: string;
+  productPrice: number;
+  optionId: number;
+  quantity: number;
+  createdAt: string;
+  updatedAt: string;
+  optionName: string;
 };

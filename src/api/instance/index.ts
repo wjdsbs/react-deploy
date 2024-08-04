@@ -2,6 +2,13 @@ import { QueryClient } from '@tanstack/react-query';
 import type { AxiosInstance, AxiosRequestConfig } from 'axios';
 import axios from 'axios';
 
+import { servers } from '../constants';
+
+const SESSION_STORAGE_KEY = 'selectedServer';
+
+let axiosInstance: AxiosInstance | null = null;
+let currentBaseURL = servers[sessionStorage.getItem(SESSION_STORAGE_KEY)!];
+
 const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
   const instance = axios.create({
     timeout: 5000,
@@ -16,11 +23,20 @@ const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
   return instance;
 };
 
-export const BASE_URL = 'https://api.example.com';
-// TODO: 추후 서버 API 주소 변경 필요
-export const fetchInstance = initInstance({
-  baseURL: 'https://api.example.com',
-});
+export const setBaseURL = (baseURL: string) => {
+  currentBaseURL = baseURL;
+  axiosInstance = initInstance({ baseURL });
+};
+
+export const getInstance = (): AxiosInstance => {
+  if (!axiosInstance) {
+    setBaseURL(currentBaseURL);
+  }
+  return axiosInstance!;
+};
+
+export const getBaseURL = () => currentBaseURL;
+export const fetchInstance = getInstance();
 
 export const queryClient = new QueryClient({
   defaultOptions: {

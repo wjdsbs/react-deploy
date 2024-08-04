@@ -10,19 +10,20 @@ export const categoriesMockHandler = [
 
 const CATEGORIES_RESPONSE_DATA = [
   {
-    id: 2920,
-    name: '생일',
-    description: '감동을 높여줄 생일 선물 리스트',
-    color: '#5949a3',
-    imageUrl:
+    label: '생일',
+    imageURL:
       'https://img1.daumcdn.net/thumb/S104x104/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fgift%2Fhome%2Ftheme%2F292020231106_MXMUB.png',
+    title: '감동을 높여줄 생일 선물 리스트',
+    description: '예산에 쏙쏙 맞춰 AI가 자동으로 추천드려요!',
+    backgroundColor: '#5949a3',
+    categoryId: 2920,
   },
   {
-    id: 2930,
-    name: '교환권',
-    description: '놓치면 후회할 교환권 특가',
-    color: '#9290C3',
-    imageUrl:
+    label: '교환권',
+    title: '놓치면 후회할 교환권 특가',
+    backgroundColor: '#9290C3',
+    imageURL:
       'https://img1.daumcdn.net/thumb/S104x104/?fname=https%3A%2F%2Fst.kakaocdn.net%2Fproduct%2Fgift%2Fproduct%2F20240131153049_5a22b137a8d346e9beb020a7a7f4254a.jpg',
+    categoryId: 2930,
   },
 ];
