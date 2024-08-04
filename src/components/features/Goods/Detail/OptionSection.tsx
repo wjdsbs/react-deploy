@@ -29,7 +29,6 @@ export const OptionSection = ({ productId }: Props) => {
   const authInfo = useAuth();
   const location = useLocation();
 
-  // Extract productId from URL pathname
   const pathname = location.pathname;
   const urlProductId = pathname.split('/').pop(); // Extract the last segment of the path
 
@@ -62,16 +61,16 @@ export const OptionSection = ({ productId }: Props) => {
         },
         body: JSON.stringify(requestBody),
       });
-
-      const responseText = await response.text();
-      console.log('Response Text:', responseText);
+      console.log(response);
+      const responseJson = await response.json();
+      console.log('Response Text:', responseJson);
 
       if (!response.ok) {
         throw new Error('관심 등록 실패');
       }
 
       try {
-        const responseData = JSON.parse(responseText);
+        const responseData = JSON.parse(responseJson);
         console.log('Response Data:', responseData);
       } catch (jsonError) {
         console.error('Failed to parse response as JSON:', jsonError);

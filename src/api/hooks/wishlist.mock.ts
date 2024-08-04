@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'msw';
 import { rest } from 'msw';
 
-const MOCK_TOKEN = 'valid-token';
+const MOCK_TOKEN = 'mock-token';
 
 export const addWishHandler: RequestHandler = rest.post('/api/wish', async (req, res, ctx) => {
   const authHeader = req.headers.get('Authorization');

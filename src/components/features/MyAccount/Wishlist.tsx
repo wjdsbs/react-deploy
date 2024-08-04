@@ -1,6 +1,8 @@
 import { Box, Divider, Heading, Text, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
+import { useAuth } from '@/provider/Auth';
+
 import WishlistItem from './WishlistItem';
 
 interface Product {
@@ -47,13 +49,14 @@ interface WishlistResponse {
 export const Wishlist = () => {
   const [items, setItems] = useState<WishlistItemProps[]>([]);
   const [error, setError] = useState<string | null>(null);
-
+  const AuthInfo = useAuth();
+  const token = AuthInfo?.token;
   useEffect(() => {
     const fetchWishlistItems = async () => {
       try {
         const response = await fetch('/api/wish?page=0&size=10&sort=createdDate,desc', {
           headers: {
-            Authorization: 'Bearer valid-token',
+            Authorization: `Bearer ${token}`,
           },
         });
         if (!response.ok) {
@@ -75,14 +78,14 @@ export const Wishlist = () => {
     };
 
     fetchWishlistItems();
-  }, []);
+  }, [token]);
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await fetch(`/api/wishes/${id}`, {
+      const response = await fetch(`/api/wish/${id}`, {
         method: 'DELETE',
         headers: {
-          Authorization: 'Bearer valid-token',
+          Authorization: `Bearer ${token}`,
         },
       });
 
