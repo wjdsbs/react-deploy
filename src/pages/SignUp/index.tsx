@@ -25,18 +25,24 @@ export const SignUpPage = () => {
       setError('이메일과 비밀번호를 확인해주세요.');
       return;
     }
+
+    const baseURL = getBaseURL();
+    const requestURL = baseURL ? `${baseURL}/api/user/register` : '/api/user/register';
+
     try {
-      const response = await fetch(getBaseURL() + '/api/user/register', {
+      const response = await fetch(requestURL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password } as SignUpRequest),
       });
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message);
       }
+
       alert('회원가입에 성공했습니다.');
       navigate('/login');
     } catch (err) {

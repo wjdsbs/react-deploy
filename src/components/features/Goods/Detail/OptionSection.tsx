@@ -1,12 +1,10 @@
 import styled from '@emotion/styled';
 import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import {
-  type ProductDetailRequestParams,
-  useGetProductDetail,
-} from '@/api/hooks/useGetProductDetail';
+import { useGetProductDetail } from '@/api/hooks/useGetProductDetail';
 import { useGetProductOptions } from '@/api/hooks/useGetProductOptions';
+import { getBaseURL } from '@/api/instance';
 import { Button } from '@/components/common/Button';
 import { useAuth } from '@/provider/Auth';
 import { getDynamicPath, RouterPath } from '@/routes/path';
@@ -15,7 +13,9 @@ import { orderHistorySessionStorage } from '@/utils/storage';
 import { CountOptionItem } from './OptionItem/CountOptionItem';
 import WishButton from './WishButton';
 
-type Props = ProductDetailRequestParams;
+type Props = {
+  productId: string;
+};
 
 export const OptionSection = ({ productId }: Props) => {
   const { data: detail } = useGetProductDetail({ productId });
@@ -23,12 +23,15 @@ export const OptionSection = ({ productId }: Props) => {
 
   const [countAsString, setCountAsString] = useState('1');
   const [isFavorited, setIsFavorited] = useState(false);
-  const totalPrice = useMemo(() => {
-    return detail.price * Number(countAsString);
-  }, [detail, countAsString]);
+  const totalPrice = useMemo(() => detail.price * Number(countAsString), [detail, countAsString]);
 
   const navigate = useNavigate();
   const authInfo = useAuth();
+  const location = useLocation();
+
+  // Extract productId from URL pathname
+  const pathname = location.pathname;
+  const urlProductId = pathname.split('/').pop(); // Extract the last segment of the path
 
   const handleWishButtonClick = async () => {
     const token = authInfo?.token;
@@ -36,7 +39,6 @@ export const OptionSection = ({ productId }: Props) => {
       const isConfirm = window.confirm(
         '로그인이 필요한 메뉴입니다.\n로그인 페이지로 이동하시겠습니까?',
       );
-
       if (!isConfirm) return;
       return navigate(getDynamicPath.login());
     }
@@ -47,25 +49,39 @@ export const OptionSection = ({ productId }: Props) => {
     }
 
     try {
-      const response = await fetch('/api/wish', {
+      const requestBody = {
+        id: urlProductId ? parseInt(urlProductId) : 0,
+      };
+      console.log(urlProductId);
+      const response = await fetch(getBaseURL() + '/api/wish', {
         method: 'POST',
         headers: {
+          Accept: '*/*',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer "${token}"`,
         },
-        body: JSON.stringify({ productId }),
+        body: JSON.stringify(requestBody),
       });
+
+      const responseText = await response.text();
+      console.log('Response Text:', responseText);
 
       if (!response.ok) {
         throw new Error('관심 등록 실패');
+      }
+
+      try {
+        const responseData = JSON.parse(responseText);
+        console.log('Response Data:', responseData);
+      } catch (jsonError) {
+        console.error('Failed to parse response as JSON:', jsonError);
       }
 
       alert('관심 등록 완료');
       setIsFavorited(true);
     } catch (err) {
       if (err instanceof Error) {
-        console.log(`token : ${token}`);
-
+        console.error('Error:', err);
         alert('관심 등록 실패: ' + err.message);
       }
     }
@@ -76,7 +92,6 @@ export const OptionSection = ({ productId }: Props) => {
       const isConfirm = window.confirm(
         '로그인이 필요한 메뉴입니다.\n로그인 페이지로 이동하시겠습니까?',
       );
-
       if (!isConfirm) return;
       return navigate(getDynamicPath.login());
     }
@@ -129,7 +144,6 @@ const PricingWrapper = styled.div`
   background-color: #f5f5f5;
   display: flex;
   justify-content: space-between;
-
   font-size: 14px;
   font-weight: 700;
   line-height: 14px;

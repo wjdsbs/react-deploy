@@ -29,7 +29,10 @@ export const LoginPage = () => {
     }
 
     try {
-      const response = await fetch(getBaseURL() + '/api/login', {
+      const baseURL = getBaseURL();
+      const requestURL = baseURL ? `${baseURL}/api/user/register` : '/api/user/register';
+
+      const response = await fetch(requestURL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ import { rest } from 'msw';
 
 const MOCK_TOKEN = 'valid-token';
 
-export const addWishHandler: RequestHandler = rest.post('/api/wishes', async (req, res, ctx) => {
+export const addWishHandler: RequestHandler = rest.post('/api/wish', async (req, res, ctx) => {
   const authHeader = req.headers.get('Authorization');
   const token = authHeader ? authHeader.replace('Bearer ', '') : '';
 
@@ -25,7 +25,7 @@ export const addWishHandler: RequestHandler = rest.post('/api/wishes', async (re
 });
 
 export const deleteWishHandler: RequestHandler = rest.delete(
-  '/api/wishes/:wishId',
+  '/api/wish/:wishId',
   (req, res, ctx) => {
     const authHeader = req.headers.get('Authorization');
     const token = authHeader ? authHeader.replace('Bearer ', '') : '';
@@ -38,7 +38,7 @@ export const deleteWishHandler: RequestHandler = rest.delete(
   },
 );
 
-export const getWishesHandler: RequestHandler = rest.get('/api/wishes', (req, res, ctx) => {
+export const getWishesHandler: RequestHandler = rest.get('/api/wish', (req, res, ctx) => {
   const authHeader = req.headers.get('Authorization');
   const token = authHeader ? authHeader.replace('Bearer ', '') : '';
 
