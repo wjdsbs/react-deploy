@@ -51,7 +51,7 @@ export const Wishlist = () => {
   useEffect(() => {
     const fetchWishlistItems = async () => {
       try {
-        const response = await fetch('/api/wishes?page=0&size=10&sort=createdDate,desc', {
+        const response = await fetch('/api/wish?page=0&size=10&sort=createdDate,desc', {
           headers: {
             Authorization: 'Bearer valid-token',
           },
@@ -68,6 +68,7 @@ export const Wishlist = () => {
             price: item.product.price,
           })),
         );
+        console.log(data);
       } catch (err) {
         setError('위시리스트를 불러오는데 실패했습니다.');
       }

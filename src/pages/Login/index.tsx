@@ -30,7 +30,7 @@ export const LoginPage = () => {
 
     try {
       const baseURL = getBaseURL();
-      const requestURL = baseURL ? `${baseURL}/api/user/register` : '/api/user/register';
+      const requestURL = baseURL ? `${baseURL}/api/login` : '/api/login';
 
       const response = await fetch(requestURL, {
         method: 'POST',
